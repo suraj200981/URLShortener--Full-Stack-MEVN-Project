@@ -45,6 +45,10 @@
 </v-btn>
   </v-col>  
 </v-row>
+<p><b>URLMini.io</b> is a free tool to shorten a URL or reduce a link<br>
+Use my URL Shortener to create a shortened link making it easy to remember</p>
+<v-row>
+</v-row>
     </v-card-text>
     
   </v-card>

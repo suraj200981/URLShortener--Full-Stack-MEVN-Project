@@ -22,7 +22,7 @@
     height="200"
   >
     <v-card-text>
-      <h1 style="color:black">Paste the URL to be shortened</h1>
+      <h1 style="color:black; padding-bottom: 8px;">Paste the URL to be shortened</h1>
       <br>
       <v-row>
         <v-col md="9">
@@ -57,7 +57,6 @@
         <h2 class="headline font-weight-bold mb-3">
           Technologies Used
         </h2>
-
         <v-row justify="center">
           <a
             v-for="(eco, i) in ecosystem"
@@ -69,6 +68,7 @@
             {{ eco.text }}
           </a>
         </v-row>
+        <p style="padding-top:20px">-----MEVN Stack-----</p>
       </v-col>
     </v-row>
   </v-container>
@@ -81,53 +81,21 @@
     data: () => ({
       ecosystem: [
         {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader',
+          text: 'MongoDB',
+          href: 'https://github.com/vuetifyjs/MongoDB',
         },
         {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify',
+          text: 'Express',
+          href: 'https://github.com/vuetifyjs/vuetify/Express',
         },
         {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify',
-        },
-      ],
-      importantLinks: [
-        {
-          text: 'Documentation',
-          href: 'https://vuetifyjs.com',
+          text: 'VueJS',
+          href: 'https://github.com/vuetifyjs/awesome-vuetify/VueJS',
         },
         {
-          text: 'Chat',
-          href: 'https://community.vuetifyjs.com',
-        },
-        {
-          text: 'Made with Vuetify',
-          href: 'https://madewithvuejs.com/vuetify',
-        },
-        {
-          text: 'Twitter',
-          href: 'https://twitter.com/vuetifyjs',
-        },
-        {
-          text: 'Articles',
-          href: 'https://medium.com/vuetify',
-        },
-      ],
-      whatsNext: [
-        {
-          text: 'Explore components',
-          href: 'https://vuetifyjs.com/components/api-explorer',
-        },
-        {
-          text: 'Select a layout',
-          href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
-        },
-        {
-          text: 'Frequently Asked Questions',
-          href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-        },
+          text: 'NodeJS',
+          href: 'https://github.com/vuetifyjs/awesome-vuetify/NodeJS',
+        }
       ],
     }),
   }

@@ -21,6 +21,7 @@
     max-width="700"
     height="200"
   >
+  <v-form @submit="onSubmit">
     <v-card-text>
       <h1 style="color:black; padding-bottom: 8px;">Paste the URL to be shortened</h1>
       <br>
@@ -29,6 +30,7 @@
       <v-text-field
             placeholder="Enter the link here"
             solo
+            v-model="url"
           ></v-text-field>
         
 </v-col>
@@ -41,15 +43,20 @@
   raised
   text
   tile
+  type="submit"
 >Shorten URL
 </v-btn>
   </v-col>  
+  
 </v-row>
+
 <p><b>URLMini.io</b> is a free tool to shorten a URL or reduce a link<br>
 Use my URL Shortener to create a shortened link making it easy to remember</p>
 <v-row>
 </v-row>
+
     </v-card-text>
+    </v-form>
     
   </v-card>
       </v-col>
@@ -101,7 +108,16 @@ Use my URL Shortener to create a shortened link making it easy to remember</p>
           href: 'https://github.com/vuetifyjs/awesome-vuetify/NodeJS',
         }
       ],
+      url: '',
     }),
+    methods: {
+      onSubmit(e) {
+        e.preventDefault();
+if(!this.url){
+                    alert('Please add a URL')
+                    return
+                }      }
+    }
   }
 </script>
 

@@ -115,7 +115,7 @@ import axios from "axios";
     methods: {
       onSubmit(e) {
         e.preventDefault();
-                let data= { name: this.url };
+                let data= { url: this.url };
                  console.log(data);
                 axios.post('http://localhost:8081/api/shortener', data)
                 .then(response => {

@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/shortner");
+const shortenerController = require("../controllers/shortener_controller.js");
+
+router.post("/shortner", shortenerController.urlShortner);
 
 module.exports = router;

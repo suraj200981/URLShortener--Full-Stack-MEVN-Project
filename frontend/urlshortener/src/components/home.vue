@@ -21,7 +21,7 @@
     max-width="700"
     height="200"
   >
-  <v-form @submit="onSubmit">
+  <v-form @submit="onSubmit" method="POST">
     <v-card-text>
       <h1 style="color:black; padding-bottom: 8px;">Paste the URL to be shortened</h1>
       <br>
@@ -86,6 +86,8 @@ Use my URL Shortener to create a shortened link making it easy to remember</p>
 </template>
 
 <script>
+import axios from "axios";
+
   export default {
     name: 'homePage',
 
@@ -113,10 +115,9 @@ Use my URL Shortener to create a shortened link making it easy to remember</p>
     methods: {
       onSubmit(e) {
         e.preventDefault();
-                if(!this.url){
-                    alert('Please add a URL')
-                    return
-                }      }
+                let data= { url: this.url };
+                axios.post('/api/shorten', data)
+                }
     }
   }
 </script>

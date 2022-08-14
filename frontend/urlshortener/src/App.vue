@@ -6,7 +6,7 @@
       dark
     >
       <v-toolbar-title>
-       URLSMini v1
+       URLShortener v1
       </v-toolbar-title>
 
       <v-spacer></v-spacer>

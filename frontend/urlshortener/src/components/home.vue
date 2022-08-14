@@ -113,7 +113,7 @@ Use my URL Shortener to create a shortened link making it easy to remember</p>
     methods: {
       onSubmit(e) {
         e.preventDefault();
-if(!this.url){
+                if(!this.url){
                     alert('Please add a URL')
                     return
                 }      }

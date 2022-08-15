@@ -1,34 +1,30 @@
 <template>
-  <v-container>
+ <v-container>
     <v-row class="text-center">
       <v-col cols="12">
       
       </v-col>
 
       <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to URLMini
+        <h1 class="display-2 font-weight-bold" style="text-align: left; padding-left: 170px;">
+            Your shortened URL
         </h1>
 
-        <p class="subheading font-weight-regular">
-          This project was created by <a  target="_blank" href="https://github.com/suraj200981">Suraj Sharma</a>
-          <br>
-          The aim of this project is to minify long URLS and make them shorter.
-        </p>
-        <br>
+        <p class="subheading font-weight-regular" style="text-align: left; padding-left: 170px;">
+Copy the shortened link and share it in messages, texts, posts, websites and other locations.          </p>
+        
         <v-card
     class="mx-auto"
     max-width="800"
-    height="220"
+    height="250"
   >
 
-  <router-link to="/about">about</router-link>
    <v-form @submit="onSubmit" method="POST">
     <v-card-text>
-      <h1 style="color:black; padding-bottom: 8px;">Paste the URL to be shortened</h1>
       <br>
-      <v-row>
-        <v-col md="9">
+      <v-row     class="mx-auto"
+>
+        <v-col md="9" >
       <v-text-field
             placeholder="Enter the link here"
             solo
@@ -46,14 +42,15 @@
   text
   tile
   type="submit"
->Shorten URL
+>Copy url
 </v-btn>
   </v-col>  
   
 </v-row>
 
-<p><b>URLMini.io</b> is a free tool to shorten a URL or reduce a link<br>
-Use my URL Shortener to create a shortened link making it easy to remember</p>
+<p style="text-align:left; padding-left:20px">Long URL: </p>
+<p style="text-align:left; padding-left:20px">Track the <a href="">total of clicks</a> in real-time from your shortened URL.<br>
+Create other <router-link to="/">shortened URL.</router-link></p>
 <v-row>
 </v-row>
 
@@ -85,12 +82,11 @@ Use my URL Shortener to create a shortened link making it easy to remember</p>
     </v-row>
   </v-container>
 </template>
-
 <script>
 import axios from "axios";
 
   export default {
-    name: 'homePage',
+    name: 'generatedURl',
 
     data: () => ({
       ecosystem: [
@@ -128,7 +124,6 @@ import axios from "axios";
     }
   }
 </script>
-
 <style scoped lang="scss">
  .v-btn:not(.v-btn--round).v-size--large {
     background-color: #1976D2;

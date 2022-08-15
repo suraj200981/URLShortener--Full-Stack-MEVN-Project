@@ -3,12 +3,13 @@ const urlValidation = require("../services/urlValidationSteps.js");
 exports.urlShortner = (req) => {
   const url = req.body.url;
 
-  let step1 = urlValidation.checkLength(url);
+  let basicValidation = urlValidation.checkLength(url);
 
-  if (step1) {
+  if (basicValidation) {
     console.log("generate url");
+    urlValidation.prefixCheck(url);
   } else {
-    console.log("failed at step 1");
+    console.log("failed basic url validation");
   }
   //step 2 - check suffix of url
 };

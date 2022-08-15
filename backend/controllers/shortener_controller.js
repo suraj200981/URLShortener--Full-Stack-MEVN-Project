@@ -11,5 +11,4 @@ exports.urlShortner = (req) => {
   } else {
     console.log("failed basic url validation");
   }
-  //step 2 - check suffix of url
 };

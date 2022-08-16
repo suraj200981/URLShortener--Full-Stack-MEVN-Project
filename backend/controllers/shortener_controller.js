@@ -1,6 +1,10 @@
-const urlValidation = require("../services/urlValidationSteps.js");
 
-exports.urlShortner = (req) => {
+const urlValidation = require("../services/urlValidationSteps.js");
+const generateUrl = require("../services/generateMiniUrl.js");
+
+var variable = require("../vars/urlStore.js");
+
+exports.urlShortner = (req,res) => {
   const url = req.body.url;
 
   let basicValidation = urlValidation.checkLength(url);
@@ -8,7 +12,13 @@ exports.urlShortner = (req) => {
   if (basicValidation) {
     console.log("generate url");
     urlValidation.prefixCheck(url);
+    let generatedURL = generateUrl.generateNewUrl(url);
+
+    variable.originalURL = url;
+    res.send(`${variable.originalURL}`);
+
+    
   } else {
-    console.log("failed basic url validation");
+    res.send(`failed to generate url`);
   }
 };

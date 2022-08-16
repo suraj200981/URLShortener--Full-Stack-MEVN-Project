@@ -18,7 +18,7 @@ Copy the shortened link and share it in messages, texts, posts, websites and oth
     max-width="800"
     height="250"
   >
-
+<router-link to="/">back</router-link>
    <v-form @submit="onSubmit" method="POST">
     <v-card-text>
       <br>

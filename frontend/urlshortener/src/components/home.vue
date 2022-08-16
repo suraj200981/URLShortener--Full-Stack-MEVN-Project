@@ -22,7 +22,7 @@
     height="220"
   >
 
-  <router-link to="/about">about</router-link>
+  <router-link to="/mini">mini</router-link>
    <v-form @submit="onSubmit" method="POST">
     <v-card-text>
       <h1 style="color:black; padding-bottom: 8px;">Paste the URL to be shortened</h1>
@@ -121,6 +121,8 @@ import axios from "axios";
                 axios.post('http://localhost:8081/api/shortener', data)
                 .then(response => {
                   console.log(response.data);
+                  //redirect 
+                  this.$router.push({ name: 'mini', params: { url: response.data } });
                 }).catch(error => {
                   console.log(error);
                 });

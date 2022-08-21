@@ -119,8 +119,8 @@ import axios from "axios";
                 let data= { url: this.url };
                 axios.post('http://localhost:8081/api/shortener', data)
                 .then(response => {
-                  console.log(response.data.generate_url);
-                  let data = {oldUrl : response.data.generate_url, newUrl : response.data.short_url};
+                  console.log(response.data);
+                  let data = {oldUrl : response.data.old_url, newUrl : response.data.short_url};
                       this.$router.push({
             name: "mini",
             params: { data }

@@ -1,3 +1,5 @@
+const suffixGenerator = require("random-string-alphanumeric-generator");
+
 exports.generateNewUrl = (url) => {
-  return "urlshortener.io/KV8s0";
+  return "urlmini.io/" + suffixGenerator.randomAlphanumeric(5, "uppercase");
 };

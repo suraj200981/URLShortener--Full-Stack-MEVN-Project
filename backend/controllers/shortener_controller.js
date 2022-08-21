@@ -15,7 +15,12 @@ exports.urlShortner = (req, res) => {
 
     variable.originalURL = url;
     //send variable in json format
-    res.send(JSON.stringify({ generate_url: variable.originalURL }));
+    res.send(
+      JSON.stringify({
+        old_url: variable.originalURL,
+        short_url: generatedURL,
+      })
+    );
   } else {
     return res.status(400).send({
       message: "This is an error!",

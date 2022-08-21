@@ -44,7 +44,7 @@ Copy the shortened link and share it in messages, texts, posts, websites and oth
   
 </v-row>
 
-<p style="text-align:left; padding-left:20px">Long URL: <a href="url">{{url}}</a></p>
+<p style="text-align:left; padding-left:20px">Long URL: <a href="url">{{orignalURL}}</a></p>
 <p style="text-align:left; padding-left:20px">Track the <a href="">total of clicks</a> in real-time from your shortened URL.<br>
 Create other <router-link to="/">shortened URL.</router-link></p>
 <v-row>
@@ -103,7 +103,7 @@ import axios from "axios";
           href: 'https://github.com/vuetifyjs/awesome-vuetify/NodeJS',
         }
       ],
-      url: '',
+      orignalURL: '',
       generatedURl: '',
     }),
     methods: {
@@ -122,7 +122,8 @@ import axios from "axios";
     mounted() {
     let data = this.$route.params.data;
     console.log("data is", data);
-    this.url = data.generated_url;
+    this.orignalURL = data.oldUrl;
+    this.generatedURl = data.newUrl;
   }
   }
 </script>

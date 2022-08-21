@@ -119,9 +119,14 @@ import axios from "axios";
                 let data= { url: this.url };
                 axios.post('http://localhost:8081/api/shortener', data)
                 .then(response => {
-                  console.log(response.data);
+                  console.log(response.data.generate_url);
+                  let data = {generated_url : response.data.generate_url};
+
+                      this.$router.push({
+            name: "mini",
+            params: { data }
+          });
                   //redirect 
-                  this.$router.push({ name: 'mini', params: { url: response.data } });
                 }).catch(error => {
                   if(error.code == "ERR_BAD_REQUEST"){
                     console.log("error found: ",error.message);

@@ -26,7 +26,7 @@ Copy the shortened link and share it in messages, texts, posts, websites and oth
 >
         <v-col md="9" >
       <v-text-field
-            placeholder="Enter the link here"
+      disabled
             solo
             v-model="url"
           ></v-text-field>
@@ -120,8 +120,25 @@ import axios from "axios";
                 }).catch(error => {
                   console.log(error);
                 });
-                }
-    }
+                },
+
+        // //get data from server
+        // getData() {
+        //   axios.get('http://localhost:8081/api/shortener')
+        //   .then(response => {
+        //     console.log("found it",response.data);
+        //   }).catch(error => {
+        //     console.log(error);
+        //   });
+        // }
+
+      
+    },
+    mounted() {
+    let data = this.$route.params.data;
+    console.log("data is", data);
+    this.url = data.generated_url;
+  }
   }
 </script>
 <style scoped lang="scss">

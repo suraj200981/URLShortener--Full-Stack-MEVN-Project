@@ -3,10 +3,11 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const mongodbConnection = require("./util/database");
 
 //importing routes
 const shortenerRoute = require("./routes/shortener_route.js");
-
+const redirectRoute = require("./routes/redirect_route.js");
 app.use(cors());
 
 app.use(bodyParser.json());
@@ -14,6 +15,10 @@ app.use(bodyParser.json());
 //setting up routes
 // "/shortener" is the base url for the shortener route
 app.use("/api", shortenerRoute);
+app.use(redirectRoute);
 
-app.listen(8081);
-console.log("Server is running on port localhost:8081");
+mongodbConnection.mongodbConnect((result) => {
+  console.log(result);
+  app.listen(8081);
+  console.log("Server is running on port localhost:8081");
+});

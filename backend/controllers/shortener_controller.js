@@ -15,10 +15,20 @@ exports.urlShortner = (req,res) => {
     let generatedURL = generateUrl.generateNewUrl(url);
 
     variable.originalURL = url;
-    res.send(`${variable.originalURL}`);
+    //send variable in json format
+     res.send(JSON.stringify({generate_url: variable.originalURL}));
 
     
   } else {
-    res.send(`failed to generate url`);
+
+    return res.status(400).send({
+      message: 'This is an error!'
+   });
+   
+    
+
+    
+    
+    
   }
 };

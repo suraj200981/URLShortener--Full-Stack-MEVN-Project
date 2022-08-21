@@ -117,14 +117,15 @@ import axios from "axios";
       onSubmit(e) {
         e.preventDefault();
                 let data= { url: this.url };
-                 console.log(data);
                 axios.post('http://localhost:8081/api/shortener', data)
                 .then(response => {
                   console.log(response.data);
                   //redirect 
                   this.$router.push({ name: 'mini', params: { url: response.data } });
                 }).catch(error => {
-                  console.log(error);
+                  if(error.code == "ERR_BAD_REQUEST"){
+                    console.log("error found: ",error.message);
+                  }
                 });
                 }
     }

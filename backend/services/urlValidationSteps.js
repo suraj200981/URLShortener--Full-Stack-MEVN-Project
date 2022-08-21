@@ -13,10 +13,12 @@ exports.checkLength = (url) => {
 
 exports.prefixCheck = (url) => {
   if (checkPrefix.prefixInspection(url) == "false") {
-    return true;
+    return false;
   } else if (checkPrefix.prefixInspection(url) == "http://") {
     console.log("correct prefix found");
+    return true;
   } else if (checkPrefix.prefixInspection(url) == "https://") {
-    console.log("correct prefix found s");
+    console.log("correct prefix found and secure");
+    return true;
   }
 };

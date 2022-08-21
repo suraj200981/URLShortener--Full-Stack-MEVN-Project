@@ -11,8 +11,6 @@ exports.urlShortner = (req, res) => {
   if (basicValidation) {
     console.log("generate url");
 
-    var generatedURL = generateUrl.generateNewUrl(url);
-
     if (urlValidation.prefixCheck(url)) {
       generatedURL = generateUrl.generateNewUrl(url, "");
     } else {

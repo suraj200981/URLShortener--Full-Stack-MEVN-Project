@@ -5,7 +5,8 @@ exports.generateNewUrl = (url) => {
   const urlModel = new Url(
     url,
     "localhost:8081/" + suffixGenerator.randomAlphanumeric(5, "uppercase"),
-    ""
+    "",
+    0
   );
   urlModel.save();
   return urlModel.shortURL;

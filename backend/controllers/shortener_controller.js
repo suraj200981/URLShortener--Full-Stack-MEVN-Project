@@ -1,10 +1,9 @@
-
 const urlValidation = require("../services/urlValidationSteps.js");
 const generateUrl = require("../services/generateMiniUrl.js");
 
 var variable = require("../vars/urlStore.js");
 
-exports.urlShortner = (req,res) => {
+exports.urlShortner = (req, res) => {
   const url = req.body.url;
 
   let basicValidation = urlValidation.checkLength(url);
@@ -16,14 +15,10 @@ exports.urlShortner = (req,res) => {
 
     variable.originalURL = url;
     //send variable in json format
-     res.send(JSON.stringify({generate_url: variable.originalURL}));
-
-    
+    res.send(JSON.stringify({ generate_url: variable.originalURL }));
   } else {
-
     return res.status(400).send({
-      message: 'This is an error!'
-   });
-    
+      message: "This is an error!",
+    });
   }
 };

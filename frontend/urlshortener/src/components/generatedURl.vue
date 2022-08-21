@@ -12,25 +12,21 @@
 
         <p class="subheading font-weight-regular" style="text-align: left; padding-left: 170px;">
 Copy the shortened link and share it in messages, texts, posts, websites and other locations.          </p>
-        
         <v-card
     class="mx-auto"
     max-width="800"
-    height="250"
-  >
+    height="250">
 <router-link to="/">back</router-link>
-   <v-form @submit="onSubmit" method="POST">
+   <v-form>
     <v-card-text>
       <br>
-      <v-row     class="mx-auto"
->
+      <v-row class="mx-auto">
         <v-col md="9" >
       <v-text-field
       disabled
             solo
-            v-model="url"
+            v-model="generatedURl"
           ></v-text-field>
-        
 </v-col>
 <v-col>
   <v-btn
@@ -48,7 +44,7 @@ Copy the shortened link and share it in messages, texts, posts, websites and oth
   
 </v-row>
 
-<p style="text-align:left; padding-left:20px">Long URL: </p>
+<p style="text-align:left; padding-left:20px">Long URL: <a href="url">{{url}}</a></p>
 <p style="text-align:left; padding-left:20px">Track the <a href="">total of clicks</a> in real-time from your shortened URL.<br>
 Create other <router-link to="/">shortened URL.</router-link></p>
 <v-row>
@@ -108,6 +104,7 @@ import axios from "axios";
         }
       ],
       url: '',
+      generatedURl: '',
     }),
     methods: {
       onSubmit(e) {
@@ -121,18 +118,6 @@ import axios from "axios";
                   console.log(error);
                 });
                 },
-
-        // //get data from server
-        // getData() {
-        //   axios.get('http://localhost:8081/api/shortener')
-        //   .then(response => {
-        //     console.log("found it",response.data);
-        //   }).catch(error => {
-        //     console.log(error);
-        //   });
-        // }
-
-      
     },
     mounted() {
     let data = this.$route.params.data;

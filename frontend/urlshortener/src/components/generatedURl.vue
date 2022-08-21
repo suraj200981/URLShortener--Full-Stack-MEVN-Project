@@ -141,4 +141,5 @@ import axios from "axios";
     min-width: 78px;
     padding: 0 19.5555555556px;
 }
+
   </style>

@@ -17,7 +17,9 @@ Copy the shortened link and share it in messages, texts, posts, websites and oth
     max-width="800"
     height="250">
 <router-link to="/">back</router-link>
-   <v-form>
+   <v-form @submit.prevent="requestGet()">
+
+
     <v-card-text>
       <br>
       <v-row class="mx-auto">
@@ -45,7 +47,7 @@ Copy the shortened link and share it in messages, texts, posts, websites and oth
 </v-row>
 
 <p style="text-align:left; padding-left:20px">Long URL: <a href="url">{{orignalURL}}</a></p>
-<p style="text-align:left; padding-left:20px">Track the <router-link to="/urlcounter">total of clicks</router-link> in real-time from your shortened URL.<br>
+<p style="text-align:left; padding-left:20px">Track the <button style="text-decoration: underline; color:blue;" @click="requestGet()">total of clicks</button> in real-time from your shortened URL.<br>
 Create other <router-link to="/">shortened URL.</router-link></p>
 <v-row>
 </v-row>
@@ -107,17 +109,18 @@ import axios from "axios";
       generatedURl: '',
     }),
     methods: {
-      onSubmit(e) {
-        e.preventDefault();
-                let data= { url: this.url };
-                 console.log(data);
-                axios.post('http://localhost:8081/api/shortener', data)
-                .then(response => {
-                  console.log(response.data);
-                }).catch(error => {
-                  console.log(error);
-                });
-                },
+  requestGet() {
+
+    //make get request
+    axios.get('http://localhost:8081/data/'+ this.orignalURL )
+    .then(response => {
+      console.log(response.data);
+    }).catch(error => {
+      console.log(error);
+    });
+
+  },
+                 
     },
     mounted() {
     let data = this.$route.params.data;

@@ -90,10 +90,8 @@ import axios from "axios";
                 },
     },
     mounted() {
-    let data = this.$route.params.data;
-    console.log("data is", data);
-    this.orignalURL = data.oldUrl;
-    this.generatedURl = data.newUrl;
+
+ 
   }
   }
 </script>

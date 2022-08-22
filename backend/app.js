@@ -8,14 +8,19 @@ const mongodbConnection = require("./util/database");
 //importing routes
 const shortenerRoute = require("./routes/shortener_route.js");
 const redirectRoute = require("./routes/redirect_route.js");
+const urlDataRoute = require("./routes/urlData_route.js");
+
 app.use(cors());
 
 app.use(bodyParser.json());
 
 //setting up routes
+app.use("/data", urlDataRoute);
+
 // "/shortener" is the base url for the shortener route
 app.use("/api", shortenerRoute);
 app.use(redirectRoute);
+
 
 mongodbConnection.mongodbConnect((result) => {
   console.log(result);

@@ -8,8 +8,15 @@ exports.RedirectToOriginal = (orginalUrl, res) => {
     .then((result) => {
       console.log(result);
       console.log("Redirecting to: ", result.url);
-      //redirect to external url
-      res.redirect(result.url);
+      return db.collection("orignialurls").updateOne({ shortURL: orginalUrl }, { $set: { clicks: result.clicks+1 } }).then
+      (result2 => {
+         //redirect to external url
+        res.redirect(result.url);
+        console.log(result2);
+      }).catch(err => {
+        console.log(err);
+      })
+    
     })
     .catch((err) => {
       console.log(err);

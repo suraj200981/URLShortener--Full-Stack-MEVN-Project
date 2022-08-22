@@ -3,11 +3,11 @@ const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
 
 let _db;
+
 exports.mongodbConnect = (callback) => {
   MongoClient.connect(
-    "mongodb+srv://suraj:zT68UF5NqqklYjAo@url-shortener-cluster.gh5rf5b.mongodb.net/urlshortener?retryWrites=true&w=majority"
-  )
-    .then((result) => {
+    "mongodb+srv://suraj:@url-shortener-cluster.gh5rf5b.mongodb.net/urlshortener?retryWrites=true&w=majority"
+  ).then((result) => {
       console.log("Connected to MongoDB");
       _db = result.db();
       callback();

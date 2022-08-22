@@ -45,7 +45,7 @@ Copy the shortened link and share it in messages, texts, posts, websites and oth
 </v-row>
 
 <p style="text-align:left; padding-left:20px">Long URL: <a href="url">{{orignalURL}}</a></p>
-<p style="text-align:left; padding-left:20px">Track the <a href="">total of clicks</a> in real-time from your shortened URL.<br>
+<p style="text-align:left; padding-left:20px">Track the <router-link to="/urlcounter">total of clicks</router-link> in real-time from your shortened URL.<br>
 Create other <router-link to="/">shortened URL.</router-link></p>
 <v-row>
 </v-row>

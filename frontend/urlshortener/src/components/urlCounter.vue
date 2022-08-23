@@ -3,8 +3,10 @@
     <v-row class="text-center">
       <v-col cols="12">
       <h1 style="font-size:40px">How many clicks has your url recieved:</h1>
-        <h1 style="font-size:50px; color:grey;">0</h1>
+        <h1 style="font-size:50px; color:green;">{{clicks}}</h1>
         <p style="font-size:20px">This is a live count of clicks your shortened url will recieve</p>
+        <v-card-text><b>Shortened url:</b> {{generatedURl}}</v-card-text>
+        <v-card-text><b>Long url: </b>{{orignalURL}}</v-card-text>
         <br>
         <v-card
     class="mx-auto"
@@ -74,25 +76,49 @@ import axios from "axios";
     name: 'urlCounter',
 
     data: () => ({
-
+      orignalURL : '',
+      generatedURl: '',
+      createdBy: '',
+      clicks:''
     }),
-    methods: {
-      onSubmit(e) {
-        e.preventDefault();
-                let data= { url: this.url };
-                 console.log(data);
-                axios.post('http://localhost:8081/api/shortener', data)
-                .then(response => {
-                  console.log(response.data);
-                }).catch(error => {
-                  console.log(error);
-                });
-                },
-    },
-    mounted() {
+    created() {
+    // let data = this.$route.params.data;
+    // console.log("data is", data);
+    // this.orignalURL = data.old_url;
+    // this.generatedURl = data.new_url;
+    // this.createdBy = data.createdBy;
+    // this.clicks = data.clicks;
 
  
-  }
+    //console log local storage
+    console.log(localStorage.getItem("generatedURl"),"local storage");
+    ////////////////////////////////////////////////////////////////////////
+    // generated url from local storage
+      this.generatedURl = localStorage.getItem("generatedURl")
+      //substring generatedURl
+    var url = this.generatedURl.substring(15);
+    //make get request every 5 seconds
+    setInterval(() => {
+      axios.get('http://localhost:8081/data/'+ url )
+      .then(response => {
+        console.log(response.data);
+        let data = {oldUrl : response.data.old_url, newUrl : response.data.short_url, createdBy: response.data.createdBy, clicks: response.data.clicks};
+        //clear local storage
+        localStorage.clear();
+        //set local storage
+        localStorage.setItem("generatedURl", data.newUrl);
+        //set data to variables
+        this.orignalURL = data.oldUrl;
+        this.generatedURl = data.newUrl;
+        this.createdBy = data.createdBy;
+        this.clicks = data.clicks;
+      })
+      .catch(error => {
+        console.log(error);
+      }
+      );
+    }, 5000);
+    },
   }
 </script>
 <style scoped lang="scss">

@@ -110,11 +110,21 @@ import axios from "axios";
     }),
     methods: {
   requestGet() {
-
+    //substring generatedURl
+    var url = this.generatedURl.substring(15);
     //make get request
-    axios.get('http://localhost:8081/data/'+ this.orignalURL )
+    axios.get('http://localhost:8081/data/'+ url )
     .then(response => {
       console.log(response.data);
+      let data = {oldUrl : response.data.old_url, newUrl : response.data.short_url, createdBy: response.data.createdBy, clicks: response.data.clicks, ip: response.data.ip};
+      //clear local storage
+      localStorage.clear();
+        localStorage.setItem('generatedURl', data.newUrl);
+       this.$router.push({
+            name: "urlcounter",
+          });
+
+
     }).catch(error => {
       console.log(error);
     });

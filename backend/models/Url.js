@@ -1,11 +1,12 @@
 const mongodbConnection = require("../util/database.js");
 
 class Url {
-  constructor(url, shortURL, createdBy, clicks) {
+  constructor(url, shortURL, createdBy, clicks,ip) {
     this.url = url;
     this.shortURL = shortURL;
     this.createdBy = createdBy;
     this.clicks = clicks;
+    this.ip = ip;
   }
 
   save() {

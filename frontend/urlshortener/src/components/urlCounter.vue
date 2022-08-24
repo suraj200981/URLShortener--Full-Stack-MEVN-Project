@@ -43,7 +43,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.fullName }}</v-list-item-title>
+            <v-list-item-title>{{ item.ipAddress }}</v-list-item-title>
           </v-list-item-content>
 
           <v-list-item-action>
@@ -51,7 +51,7 @@
               depressed
               small
             >
-              View User
+              View location
 
               <v-icon
                 color="orange darken-4"
@@ -79,39 +79,43 @@ import axios from "axios";
       orignalURL : '',
       generatedURl: '',
       createdBy: '',
-      clicks:''
+      clicks:'0',
+      items: [],
     }),
     created() {
-    // let data = this.$route.params.data;
-    // console.log("data is", data);
-    // this.orignalURL = data.old_url;
-    // this.generatedURl = data.new_url;
-    // this.createdBy = data.createdBy;
-    // this.clicks = data.clicks;
-
- 
-    //console log local storage
-    console.log(localStorage.getItem("generatedURl"),"local storage");
-    ////////////////////////////////////////////////////////////////////////
+          //if items is not empty then
+          if(JSON.parse(localStorage.getItem("items")).length > 0){
+         this.items = JSON.parse(localStorage.getItem("items"));
+          }
     // generated url from local storage
       this.generatedURl = localStorage.getItem("generatedURl")
-      //substring generatedURl
+      //substring generatedURl to only include the generted code
     var url = this.generatedURl.substring(15);
-    //make get request every 5 seconds
+
+    //make get request every 5 seconds to end point to get all url information
     setInterval(() => {
       axios.get('http://localhost:8081/data/'+ url )
       .then(response => {
         console.log(response.data);
-        let data = {oldUrl : response.data.old_url, newUrl : response.data.short_url, createdBy: response.data.createdBy, clicks: response.data.clicks};
+        let data = {oldUrl : response.data.old_url, newUrl : response.data.short_url, createdBy: response.data.createdBy, clicks: response.data.clicks, ip: response.data.ip};
         //clear local storage
-        localStorage.clear();
+        localStorage.clear("generatedURl");
         //set local storage
         localStorage.setItem("generatedURl", data.newUrl);
         //set data to variables
         this.orignalURL = data.oldUrl;
         this.generatedURl = data.newUrl;
         this.createdBy = data.createdBy;
-        this.clicks = data.clicks;
+        localStorage.setItem("clicks", data.clicks);
+
+        localStorage.setItem("items", JSON.stringify(this.items));
+        this.items = JSON.parse(localStorage.getItem("items"));
+        //check if this.clicks is updated compared to local storage
+        if(this.clicks != localStorage.getItem("clicks")){
+          this.clicks = localStorage.getItem("clicks");
+           this.items.push(data.ip);
+
+        }
       })
       .catch(error => {
         console.log(error);

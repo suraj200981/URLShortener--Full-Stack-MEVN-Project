@@ -1,5 +1,6 @@
 /*------------------Service imports----------------*/
 const mongodbConnection = require("../util/database.js");
+const mockIPGen = require("../services/url data services/mockIPAddress.js");
 
 exports.getAllData  = (req, res) => {
 
@@ -9,17 +10,13 @@ exports.getAllData  = (req, res) => {
       .collection("orignialurls")
       .findOne({ shortURL: short })
       .then((result) => {
-        // console.log(result, " this is what is null");
-        // console.log(result.clicks, " this is what is clicks");
-
-        
         res.send(
             JSON.stringify({
               old_url: result.url,
               short_url: result.shortURL,
               createdBy: result.createdBy,
               clicks: result.clicks,
-              ip: req.socket.localAddress
+              ip: mockIPGen.mockIPAddressGenerate()
             })
           );
           res.redirect("/urlcounter");

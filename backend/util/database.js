@@ -6,7 +6,7 @@ let _db;
 
 exports.mongodbConnect = (callback) => {
   MongoClient.connect(
-    "mongodb+srv://suraj:@url-shortener-cluster.gh5rf5b.mongodb.net/urlshortener?retryWrites=true&w=majority"
+    "mongodb+srv://suraj:Zo6Jkk2oL45tNPby@url-shortener-cluster.gh5rf5b.mongodb.net/urlshortener?retryWrites=true&w=majority"
   ).then((result) => {
       console.log("Connected to MongoDB");
       _db = result.db();

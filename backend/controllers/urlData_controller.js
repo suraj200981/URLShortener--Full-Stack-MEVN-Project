@@ -1,6 +1,6 @@
 /*------------------Service imports----------------*/
 const mongodbConnection = require("../util/database.js");
-const mockIPGen = require("../services/url data services/mockIPAddress.js");
+// const mockIPGen = require("../services/url data services/mockIPAddress.js");
 
 exports.getAllData  = (req, res) => {
 
@@ -10,13 +10,14 @@ exports.getAllData  = (req, res) => {
       .collection("orignialurls")
       .findOne({ shortURL: short })
       .then((result) => {
+        console.log(result.ip, "on get call in url count");
         res.send(
             JSON.stringify({
               old_url: result.url,
               short_url: result.shortURL,
               createdBy: result.createdBy,
               clicks: result.clicks,
-              ip: mockIPGen.mockIPAddressGenerate()
+              ip: result.ip //mockIPGen.mockIPAddressGenerate()
             })
           );
           res.redirect("/urlcounter");

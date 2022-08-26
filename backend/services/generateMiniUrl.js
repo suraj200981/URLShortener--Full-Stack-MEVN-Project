@@ -9,7 +9,8 @@ exports.generateNewUrl = (url, prefix, req) => {
     "localhost:8081/" + suffixGenerator.randomAlphanumeric(5, "uppercase"),
     "",
     0,
-    requestIp.getClientIp(req)
+    []
+
   );
   urlModel.save();
   return urlModel.shortURL;

@@ -43,7 +43,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.ipAddress }}</v-list-item-title>
+            <v-list-item-title>{{ item }}</v-list-item-title>
           </v-list-item-content>
 
           <v-list-item-action>
@@ -83,10 +83,10 @@ import axios from "axios";
       items: [],
     }),
     created() {
-          //if items is not empty then
-          if(JSON.parse(localStorage.getItem("items")).length > 0){
-         this.items = JSON.parse(localStorage.getItem("items"));
-          }
+        //   //if items is not empty then
+        //   if(JSON.parse(localStorage.getItem("items")).length > 0){
+        //  this.items = JSON.parse(localStorage.getItem("items"));
+        //   }
     // generated url from local storage
       this.generatedURl = localStorage.getItem("generatedURl")
       //substring generatedURl to only include the generted code

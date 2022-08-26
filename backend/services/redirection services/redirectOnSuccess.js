@@ -1,4 +1,5 @@
 const mongodbConnection = require("../../util/database.js");
+const mockIPGen = require("../../services/url data services/mockIPAddress.js");
 
 exports.RedirectToOriginal = (orginalUrl, res) => {
   const db = mongodbConnection.getDB();
@@ -8,7 +9,8 @@ exports.RedirectToOriginal = (orginalUrl, res) => {
     .then((result) => {
       console.log(result);
       console.log("Redirecting to: ", result.url);
-      return db.collection("orignialurls").updateOne({ shortURL: orginalUrl }, { $set: { clicks: result.clicks+1 } }).then
+      console.log("array: ", result.ip);
+      return db.collection("orignialurls").updateOne({ shortURL: orginalUrl }, { $set: { clicks: result.clicks+1, ip: result.ip.push(mockIPGen.mockIPAddressGenerate())}.then
       (result2 => {
          //redirect to external url
         res.redirect(result.url);

@@ -1,7 +1,7 @@
 const mongodbConnection = require("../util/database.js");
 
 class Url {
-  constructor(url, shortURL, createdBy, clicks,ip) {
+  constructor(url, shortURL, createdBy, clicks, ip) {
     this.url = url;
     this.shortURL = shortURL;
     this.createdBy = createdBy;

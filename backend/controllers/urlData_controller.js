@@ -1,29 +1,26 @@
-/*------------------Service imports----------------*/
-const mongodbConnection = require("../util/database.js");
-// const mockIPGen = require("../services/url data services/mockIPAddress.js");
+/*------------------ imports----------------*/
+const mongoose = require("mongoose");
 
-exports.getAllData  = (req, res) => {
-
-    const short = "localhost:8081/"+req.params.data;
-    const db = mongodbConnection.getDB();
-    return db
-      .collection("orignialurls")
-      .findOne({ shortURL: short })
-      .then((result) => {
-        console.log(result.ip, "on get call in url count");
-        res.send(
-            JSON.stringify({
-              old_url: result.url,
-              short_url: result.shortURL,
-              createdBy: result.createdBy,
-              clicks: result.clicks,
-              ip: result.ip //mockIPGen.mockIPAddressGenerate()
-            })
-          );
-          res.redirect("/urlcounter");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  
+exports.getAllData = (req, res) => {
+  const short = "localhost:8081/" + req.params.data;
+  const db = mongoose.connection;
+  return db
+    .collection("orignialurls")
+    .findOne({ shortURL: short })
+    .then((result) => {
+      console.log(result.ip, "on get call in url count");
+      res.send(
+        JSON.stringify({
+          old_url: result.orignialURL,
+          short_url: result.shortURL,
+          createdBy: result.createdBy,
+          clicks: result.clicks,
+          ip: result.ip, //mockIPGen.mockIPAddressGenerate()
+        })
+      );
+      res.redirect("/urlcounter");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

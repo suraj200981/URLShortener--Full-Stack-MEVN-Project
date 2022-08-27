@@ -1,40 +1,57 @@
-const mongodbConnection = require("../util/database.js");
-const mongodb = require("mongodb");
+const mongoose = require("mongoose");
 
-const ObjectId = mongodb.ObjectId;
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  //   urls: [
+  //     {
+  //       type: mongoose.Schema.Types.ObjectId,
+  //       ref: "Url",
+  //     },
+  //   ],
+});
 
-class User {
-  constructor(username, email) {
-    this.username = username;
-    this.email = email;
-  }
+module.exports = mongoose.model("User", userSchema);
 
-  save() {
-    const db = mongodbConnection.getDB();
-    return db
-      .collection("users")
-      .insertOne(this)
-      .then((result) => {
-        console.log(result);
-        return result;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+// class User {
+//   constructor(username, email) {
+//     this.username = username;
+//     this.email = email;
+//   }
 
-  static findById(userId) {
-    const db = mongodbConnection.getDB();
-    return db
-      .collection("users")
-      .findOne({ _id: new mongodb.ObjectId(userId) })
-      .then((result) => {
-        console.log(result);
-        return result;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-}
-module.exports = User;
+//   save() {
+//     const db = mongoose.connection;
+//     return db
+//       .collection("users")
+//       .insertOne(this)
+//       .then((result) => {
+//         console.log(result);
+//         return result;
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   }
+
+//   static findById(userId) {
+//     const db = mongoose.connection;
+//     return db
+//       .collection("users")
+//       .findOne({ _id: new mongodb.ObjectId(userId) })
+//       .then((result) => {
+//         console.log(result);
+//         return result;
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   }
+// }
+// module.exports = User;

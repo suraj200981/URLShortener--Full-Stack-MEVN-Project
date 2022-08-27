@@ -1,8 +1,8 @@
-const mongodbConnection = require("../../util/database.js");
+const mongoose = require("mongoose");
 const mockIPGen = require("../../services/url data services/mockIPAddress.js");
 
 exports.RedirectToOriginal = (orginalUrl, res) => {
-  const db = mongodbConnection.getDB();
+  const db = mongoose.connection;
   return db
     .collection("orignialurls")
     .findOne({ shortURL: orginalUrl })

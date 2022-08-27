@@ -3,7 +3,9 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const mongodbConnection = require("./util/database");
+
+//import mongoose
+const mongoose = require("mongoose");
 
 //model imports
 const User = require("./models/User.js");
@@ -35,8 +37,15 @@ app.use("/data", urlDataRoute);
 app.use("/api", shortenerRoute);
 app.use(redirectRoute);
 
-mongodbConnection.mongodbConnect((result) => {
-  console.log(result);
-  app.listen(8081);
-  console.log("Server is running on port localhost:8081");
-});
+mongoose
+  .connect(
+    "mongodb+srv://suraj:Zo6Jkk2oL45tNPby@url-shortener-cluster.gh5rf5b.mongodb.net/urlshortener?retryWrites=true&w=majority"
+  )
+  .then((result) => {
+    console.log("Connected to MongoDB");
+    app.listen(8081);
+    console.log("Server is running on port localhost:8081");
+  })
+  .catch((err) => {
+    console.log(err);
+  });

@@ -1,6 +1,5 @@
 const suffixGenerator = require("random-string-alphanumeric-generator");
 const Url = require("../models/Url.js");
-const requestIp = require("request-ip");
 
 exports.generateNewUrl = (url, prefix, req) => {
   //create a new url object

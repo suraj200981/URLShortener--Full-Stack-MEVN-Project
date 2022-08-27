@@ -10,17 +10,26 @@ exports.RedirectToOriginal = (orginalUrl, res) => {
       console.log(result);
       console.log("Redirecting to: ", result.url);
       console.log("array: ", result.ip);
-      return db.collection("orignialurls").updateOne({ shortURL: orginalUrl }, { $set: { clicks: result.clicks+1, ip: result.ip.push(mockIPGen.mockIPAddressGenerate())}.then
-      (result2 => {
-         //redirect to external url
-        res.redirect(result.url);
-        console.log(result2);
-      }).catch(err => {
-        console.log(err);
-      })
-    
-    })
-    .catch((err) => {
-      console.log(err);
+      return db
+        .collection("orignialurls")
+        .updateOne(
+          { shortURL: orginalUrl },
+          {
+            $push: {
+              ip: mockIPGen.mockIPAddressGenerate(),
+            },
+            $set: {
+              clicks: result.clicks + 1,
+            },
+          }
+        )
+        .then((result2) => {
+          //redirect to external url
+          res.redirect(result.url);
+          console.log(result2);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
 };

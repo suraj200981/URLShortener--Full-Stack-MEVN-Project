@@ -26,11 +26,11 @@
     <v-divider></v-divider>
 
     <v-virtual-scroll
-      :items="items"
+     :items="items"
       :item-height="50"
       height="300"
     >
-      <template v-slot:default="{ item }">
+      <template v-slot:default="{item}">
         <v-list-item>
           <v-list-item-avatar>
             <v-avatar
@@ -38,7 +38,7 @@
               size="56"
               class="white--text"
             >
-              {{ item.initials }}
+              <!-- {{ item.initials }} -->
             </v-avatar>
           </v-list-item-avatar>
 
@@ -83,45 +83,47 @@ import axios from "axios";
       items: [],
     }),
     created() {
-        //   //if items is not empty then
-        //   if(JSON.parse(localStorage.getItem("items")).length > 0){
-        //  this.items = JSON.parse(localStorage.getItem("items"));
-        //   }
     // generated url from local storage
       this.generatedURl = localStorage.getItem("generatedURl")
       //substring generatedURl to only include the generted code
     var url = this.generatedURl.substring(15);
 
+
+
     //make get request every 5 seconds to end point to get all url information
     setInterval(() => {
       axios.get('http://localhost:8081/data/'+ url )
       .then(response => {
-        console.log(response.data);
+        console.log(response.data.ip);
         let data = {oldUrl : response.data.old_url, newUrl : response.data.short_url, createdBy: response.data.createdBy, clicks: response.data.clicks, ip: response.data.ip};
-        //clear local storage
+        //clear shorted url from local storageon each request to ensure it is up to date
         localStorage.clear("generatedURl");
+
         //set local storage
         localStorage.setItem("generatedURl", data.newUrl);
         //set data to variables
         this.orignalURL = data.oldUrl;
         this.generatedURl = data.newUrl;
         this.createdBy = data.createdBy;
+        // 
+        localStorage.setItem("items", JSON.stringify(data.ip));
         localStorage.setItem("clicks", data.clicks);
 
-        localStorage.setItem("items", JSON.stringify(this.items));
-        this.items = JSON.parse(localStorage.getItem("items"));
         //check if this.clicks is updated compared to local storage
         if(this.clicks != localStorage.getItem("clicks")){
           this.clicks = localStorage.getItem("clicks");
-           this.items.push(data.ip);
-
+           //loop through data.ip and push to items array
+            for(var i = 0; i < data.ip.length; i++){
+              this.items.push(data.ip[i]);
+              this.items = JSON.parse(localStorage.getItem("items"));
+        }
         }
       })
       .catch(error => {
         console.log(error);
       }
       );
-    }, 5000);
+    }, 1000);
     },
   }
 </script>

@@ -15,8 +15,7 @@ Copy the shortened link and share it in messages, texts, posts, websites and oth
         <v-card
     class="mx-auto"
     max-width="800"
-    height="250">
-<router-link to="/">back</router-link>
+    height="300">
    <v-form @submit.prevent="requestGet()">
 
 
@@ -48,7 +47,9 @@ Copy the shortened link and share it in messages, texts, posts, websites and oth
 
 <p style="text-align:left; padding-left:20px">Long URL: <a href="url">{{orignalURL}}</a></p>
 <p style="text-align:left; padding-left:20px">Track the <button style="text-decoration: underline; color:blue;" @click="requestGet()">total of clicks</button> in real-time from your shortened URL.<br>
-Create other <router-link to="/">shortened URL.</router-link></p>
+Create other <router-link to="/">shortened URL.</router-link><br>
+<br>
+To manage your shortended urls, please <router-link to="/login">login</router-link></p>
 <v-row>
 </v-row>
 

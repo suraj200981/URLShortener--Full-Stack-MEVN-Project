@@ -6,15 +6,18 @@
       color="primary"
       dark
     >
+     <v-btn
+        to="/"
+        text
+      >
       <v-toolbar-title>
        URLShortener v1
       </v-toolbar-title>
-
+    </v-btn>
       <v-spacer></v-spacer>
 
       <v-btn
         to="/login"
-        target="_blank"
         text
       >
         <span class="mr-2">Login/Signup

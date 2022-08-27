@@ -2,13 +2,13 @@
 
 <v-row class="text-center">
       <v-col cols="12">
-              <h1 style="font-size:40px">Login or sign up for more premium features</h1>
+              <h1 style="font-size:40px">Login or sign up to explore more premium features</h1>
               <br>
-    <v-card max-width="300" class="mx-auto"
+    <v-card max-width="500" class="mx-auto"
 >
         <v-tabs
             v-model="tab"
-            background-color=#1976D2
+            background-color=#E65100
             centered
             dark
             icons-and-text
@@ -16,26 +16,63 @@
             <v-tabs-slider></v-tabs-slider>
 
             <v-tab href="#login">
-                Subscribe
-                <v-icon>mdi-phone</v-icon>
+                login
+                <v-icon>mdi-door</v-icon>
             </v-tab>
 
             <v-tab href="#reg">
-                Contact
-                <v-icon>mdi-heart</v-icon>
+                Sign up
+                <v-icon>mdi-pencil</v-icon>
             </v-tab>
         </v-tabs>
 
         <v-tabs-items v-model="tab">
             <v-tab-item :key="1" value="login">
                 <v-card flat>
-                    <v-card-text>login</v-card-text>
+                    <v-card-text> <v-text-field
+            outlined
+            label="user name"
+            prepend-icon="mdi-account-outline"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            label="email address"
+            prepend-icon="mdi-email"
+          ></v-text-field>
+           <v-btn
+      class="ma-2"
+      :loading="loading"
+      :disabled="loading"
+      color="primary"
+      @click="loader = 'loading'"
+    >
+      login
+    </v-btn>
+          </v-card-text>
                 </v-card>
             </v-tab-item>
             <v-tab-item :key="2" value="reg">
                 <v-card flat>
-                    <v-card-text>reg</v-card-text>
-                </v-card>
+ <v-card-text> <v-text-field
+            outlined
+            label="user name"
+            prepend-icon="mdi-account-outline"
+          ></v-text-field>
+          <v-text-field
+            outlined
+            label="email address"
+            prepend-icon="mdi-email"
+          ></v-text-field>
+           <v-btn
+      class="ma-2"
+      :loading="loading"
+      :disabled="loading"
+      color="primary"
+      @click="loader = 'loading'"
+    >
+      sign up
+    </v-btn>
+          </v-card-text>                </v-card>
             </v-tab-item>
         </v-tabs-items>
     </v-card>
@@ -49,9 +86,21 @@
     name: 'loginReg',
 
     data: () => ({
-          tab: "subscribe"
+        tab: "login",
+        loader: null,
+        loading: false,
 
     }),
+     watch: {
+      loader () {
+        const l = this.loader
+        this[l] = !this[l]
+
+        setTimeout(() => (this[l] = false), 1000)
+
+        this.loader = null
+      },
+    },
   }
 </script>
 <style scoped lang="scss">
@@ -69,4 +118,44 @@
     padding: 0 19.5555555556px;
 }
 
+
+
+//for buttons
+
+ .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
   </style>

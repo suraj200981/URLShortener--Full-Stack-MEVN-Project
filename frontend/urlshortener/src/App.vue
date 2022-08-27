@@ -13,7 +13,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        to="/login"
         target="_blank"
         text
       >

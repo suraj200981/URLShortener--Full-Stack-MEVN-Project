@@ -5,23 +5,22 @@ var variable = require("../vars/urlStore.js");
 
 exports.urlShortner = (req, res) => {
   const url = req.body.url;
-
   let basicValidation = urlValidation.checkLength(url);
 
   if (basicValidation) {
     console.log("generate url");
 
     if (urlValidation.prefixCheck(url)) {
-      generatedURL = generateUrl.generateNewUrl(url, "", req);
+      generatedURL = generateUrl.generateNewUrl(url, "");
     } else {
-      generatedURL = generateUrl.generateNewUrl(url, "http://", req);
+      generatedURL = generateUrl.generateNewUrl(url, "http://");
     }
-    variable.originalURL = url;
+    variable.orignialURL = generatedURL.orignialURL;
     //send variable in json format
     res.send(
       JSON.stringify({
-        old_url: variable.originalURL,
-        short_url: generatedURL,
+        orignialURL: variable.orignialURL,
+        shortURL: generatedURL.shortURL,
       })
     );
   } else {

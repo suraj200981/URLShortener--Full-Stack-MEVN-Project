@@ -5,15 +5,15 @@ exports.getAllData = (req, res) => {
   const short = "localhost:8081/" + req.params.data;
   const db = mongoose.connection;
   return db
-    .collection("orignialurls")
+    .collection("urls")
     .findOne({ shortURL: short })
     .then((result) => {
-      console.log(result.ip, "on get call in url count");
+      console.log(result, "on get call in url count");
       res.send(
         JSON.stringify({
           old_url: result.orignialURL,
           short_url: result.shortURL,
-          createdBy: result.createdBy,
+          // createdBy: result.createdBy,
           clicks: result.clicks,
           ip: result.ip, //mockIPGen.mockIPAddressGenerate()
         })

@@ -4,14 +4,14 @@ const mockIPGen = require("../../services/url data services/mockIPAddress.js");
 exports.RedirectToOriginal = (orginalUrl, res) => {
   const db = mongoose.connection;
   return db
-    .collection("orignialurls")
+    .collection("urls")
     .findOne({ shortURL: orginalUrl })
     .then((result) => {
       console.log(result);
-      console.log("Redirecting to: ", result.url);
+      console.log("Redirecting to: ", result.orignialURL);
       console.log("array: ", result.ip);
       return db
-        .collection("orignialurls")
+        .collection("urls")
         .updateOne(
           { shortURL: orginalUrl },
           {
@@ -25,7 +25,7 @@ exports.RedirectToOriginal = (orginalUrl, res) => {
         )
         .then((result2) => {
           //redirect to external url
-          res.redirect(result.url);
+          res.redirect(result.orignialURL);
           console.log(result2);
         })
         .catch((err) => {

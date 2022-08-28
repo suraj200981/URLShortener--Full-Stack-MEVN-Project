@@ -1,19 +1,17 @@
 const suffixGenerator = require("random-string-alphanumeric-generator");
 const Url = require("../models/Url.js");
-const mongodb = require("mongodb");
-const ObjectId = mongodb.ObjectId;
 
-exports.generateNewUrl = (url, prefix, req) => {
+exports.generateNewUrl = (url, prefix) => {
   //create a new url object
-  const urlModel = new Url(
-    prefix + url,
-    "localhost:8081/" + suffixGenerator.randomAlphanumeric(5, "uppercase"),
-    0,
-    [],
-    null
-  );
+  const urlModel = new Url({
+    orignialURL: String(prefix) + String(url),
+    shortURL:
+      "localhost:8081/" + suffixGenerator.randomAlphanumeric(5, "uppercase"),
+    clicks: 0,
+    ip: [],
+    createdAt: new Date(),
+  });
   //save the url object to the database
-  return urlModel.save();
-  // urlModel.save();
-  // return urlModel;
+  urlModel.save();
+  return urlModel;
 };

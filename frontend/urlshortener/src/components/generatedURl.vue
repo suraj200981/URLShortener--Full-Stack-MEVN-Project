@@ -116,11 +116,11 @@ import axios from "axios";
     //make get request
     axios.get('http://localhost:8081/data/'+ url )
     .then(response => {
-      console.log(response.data);
-      let data = {oldUrl : response.data.old_url, newUrl : response.data.short_url, createdBy: response.data.createdBy, clicks: response.data.clicks, ip: response.data.ip};
+      console.log(response.data,"data lmao");
+      let data = {orignialURL : response.data.old_url, shortURL : response.data.short_url, createdBy: response.data.createdBy, clicks: response.data.clicks, ip: response.data.ip};
       //clear local storage
       localStorage.clear();
-        localStorage.setItem('generatedURl', data.newUrl);
+        localStorage.setItem('generatedURl', data.shortURL);
        this.$router.push({
             name: "urlcounter",
           });
@@ -136,8 +136,8 @@ import axios from "axios";
     mounted() {
     let data = this.$route.params.data;
     console.log("data is", data);
-    this.orignalURL = data.oldUrl;
-    this.generatedURl = data.newUrl;
+    this.orignalURL = data.orignialURL;
+    this.generatedURl = data.shortURL;
   }
   }
 </script>

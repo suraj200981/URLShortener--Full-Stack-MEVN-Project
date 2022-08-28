@@ -19,16 +19,16 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-// app.use((req, res, next) => {
-//   User.findById("630a1890c62cc1242c9dbe55")
-//     .then((user) => {
-//       req.user = user;
-//       next();
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
+app.use((req, res, next) => {
+  User.findById("630a1890c62cc1242c9dbe55")
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 //setting up routes
 app.use("/data", urlDataRoute);

@@ -4,8 +4,8 @@
   "description": "backend of urlshortener",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jest"
   },
   "author": "Suraj Sharma",
   "license": "ISC",
@@ -18,5 +18,8 @@
     "nodemon": "^2.0.19",
     "random-string-alphanumeric-generator": "^0.12.2",
     "request-ip": "^3.3.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.1"
   }
 }

@@ -29,50 +29,62 @@
         <v-tabs-items v-model="tab">
             <v-tab-item :key="1" value="login">
                 <v-card flat>
+                  <v-form @submit="login()" method="GET">
+
                     <v-card-text> <v-text-field
             outlined
             label="user name"
             prepend-icon="mdi-account-outline"
+            v-model="username"
           ></v-text-field>
           <v-text-field
             outlined
             label="email address"
             prepend-icon="mdi-email"
+            v-model="email"
           ></v-text-field>
            <v-btn
       class="ma-2"
       :loading="loading"
       :disabled="loading"
       color="primary"
-      @click="loader = 'loading'"
+      @click="loader = 'loading', login()"
     >
       login
     </v-btn>
           </v-card-text>
+        </v-form>
                 </v-card>
             </v-tab-item>
             <v-tab-item :key="2" value="reg">
                 <v-card flat>
+                  <v-form @submit="signUp()" method="POST">
+                  
  <v-card-text> <v-text-field
             outlined
             label="user name"
             prepend-icon="mdi-account-outline"
+            v-model="usernameSignup"
           ></v-text-field>
           <v-text-field
             outlined
             label="email address"
             prepend-icon="mdi-email"
+            v-model="emailSignup"
           ></v-text-field>
            <v-btn
       class="ma-2"
       :loading="loading"
       :disabled="loading"
       color="primary"
-      @click="loader = 'loading'"
+      @click="loader = 'loading', signUp()"
     >
       sign up
     </v-btn>
-          </v-card-text>                </v-card>
+          </v-card-text>             
+        </v-form> 
+   </v-card>
+          
             </v-tab-item>
         </v-tabs-items>
     </v-card>
@@ -89,8 +101,29 @@
         tab: "login",
         loader: null,
         loading: false,
-
+        username: "",
+        email: "",
+        usernameSignup: "",
+        emailSignup: "",
     }),
+
+    methods:{
+      login(){
+        const data = {
+          username: this.username,
+          email: this.email,
+        };
+        console.log(data);
+      },
+        signUp(){
+          const data = {
+            username: this.usernameSignup,
+            email: this.emailSignup,
+          };
+
+          console.log(data);
+        }
+    },
      watch: {
       loader () {
         const l = this.loader

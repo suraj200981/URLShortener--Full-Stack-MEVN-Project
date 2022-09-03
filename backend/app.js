@@ -37,6 +37,7 @@ app.use("/data", urlDataRoute);
 app.use("/api", shortenerRoute);
 app.use(redirectRoute);
 
+
 mongoose
   .connect(
     "mongodb+srv://suraj:Zo6Jkk2oL45tNPby@url-shortener-cluster.gh5rf5b.mongodb.net/urlshortener?retryWrites=true&w=majority"

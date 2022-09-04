@@ -14,6 +14,7 @@ const User = require("./models/User.js");
 const shortenerRoute = require("./routes/shortener_route.js");
 const redirectRoute = require("./routes/redirect_route.js");
 const urlDataRoute = require("./routes/urlData_route.js");
+const authRoute = require("./routes/auth_route.js");
 
 app.use(cors());
 
@@ -36,6 +37,7 @@ app.use("/data", urlDataRoute);
 // "/shortener" is the base url for the shortener route
 app.use("/api", shortenerRoute);
 app.use(redirectRoute);
+app.use(authRoute)
 
 
 mongoose

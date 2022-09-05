@@ -25,7 +25,9 @@ exports.RedirectToOriginal = (orginalUrl, res) => {
         )
         .then((result2) => {
           //redirect to external url
-          res.redirect(result.orignialURL);
+          res.redirect("http://localhost:8080/redirect");
+           localStorage.setItem('originalURL', result.orignialURL)
+
           console.log(result2);
         })
         .catch((err) => {

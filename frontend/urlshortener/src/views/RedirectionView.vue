@@ -35,10 +35,11 @@
     mounted () {
       this.interval = setInterval(() => {
         if (this.value === 100) {
-          return (this.value = 0)
+           return (this.value = 0), window.location.href = localStorage.getItem('originalURL')
+
         }
         this.value += 10
-      }, 700)
+      }, 500)
     },
   }
   

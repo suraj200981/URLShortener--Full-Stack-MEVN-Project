@@ -21,6 +21,7 @@ exports.urlShortner = (req, res) => {
       JSON.stringify({
         orignialURL: variable.orignialURL,
         shortURL: generatedURL.shortURL,
+        isAuthenticated: req.isLoggedIn,
       })
     );
   } else {

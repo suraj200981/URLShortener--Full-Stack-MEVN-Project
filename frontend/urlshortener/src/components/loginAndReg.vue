@@ -29,7 +29,7 @@
         <v-tabs-items v-model="tab">
             <v-tab-item :key="1" value="login">
                 <v-card flat>
-                  <v-form @submit="login()" method="GET">
+                  <v-form @submit="login" method="POST">
 
                     <v-card-text> <v-text-field
             outlined
@@ -84,7 +84,6 @@
           </v-card-text>             
         </v-form> 
    </v-card>
-          
             </v-tab-item>
         </v-tabs-items>
     </v-card>
@@ -92,7 +91,7 @@
     </v-row>
 </template>
 <script>
-// import axios from "axios";
+import axios from "axios";
 
   export default {
     name: 'loginReg',
@@ -113,7 +112,13 @@
           username: this.username,
           email: this.email,
         };
-        console.log(data);
+        axios.post('http://localhost:8081/api/login', data)
+          .then((res) => {
+            console.log("Logging result: ",res);
+          })
+          .catch((err) => {
+            console.log("What went wrong? : ",err);
+          });
       },
         signUp(){
           const data = {

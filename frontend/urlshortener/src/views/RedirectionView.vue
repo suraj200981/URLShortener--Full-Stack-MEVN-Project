@@ -5,7 +5,7 @@
       indeterminate
       color="cyan"
     ></v-progress-linear>
-      <h1>Redirecting to you link...</h1>
+      <h1>Redirecting to your link...</h1>
       <br>
       <br>
       <v-progress-circular
@@ -35,7 +35,7 @@
     mounted () {
       this.interval = setInterval(() => {
         if (this.value === 100) {
-           return (this.value = 0), window.location.href = localStorage.getItem('originalURL')
+           return window.location.href = localStorage.getItem('originalURL'), (this.value = 0)
 
         }
         this.value += 10

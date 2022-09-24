@@ -137,7 +137,6 @@ import axios from "axios";
     console.log("data is", data);
     this.orignalURL = data.orignialURL;
     this.generatedURl = data.shortURL;
-    this.isAuthenticated = data.isAuthenticated;
   }
   }
 </script>

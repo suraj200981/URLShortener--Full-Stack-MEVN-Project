@@ -1,7 +1,7 @@
 const suffixGenerator = require("random-string-alphanumeric-generator");
 const Url = require("../models/Url.js");
 
-exports.generateNewUrl = (url, prefix) => {
+exports.generateNewUrl = (url, prefix, req) => {
   //create a new url object
   const urlModel = new Url({
     orignialURL: String(prefix) + String(url),
@@ -10,6 +10,7 @@ exports.generateNewUrl = (url, prefix) => {
     clicks: 0,
     ip: [],
     createdAt: new Date(),
+    userId: req.user._id,
   });
   //save the url object to the database
   urlModel.save();

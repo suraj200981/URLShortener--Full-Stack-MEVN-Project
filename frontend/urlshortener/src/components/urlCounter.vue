@@ -5,8 +5,8 @@
       <h1 style="font-size:40px">How many clicks has your url recieved:</h1>
         <h1 style="font-size:50px; color:green;">{{clicks}}</h1>
         <p style="font-size:20px">This is a live count of clicks your shortened url will recieve</p>
-        <v-card-text><b>Shortened url:</b> {{generatedURl}}</v-card-text>
-        <v-card-text><b>Long url: </b>{{orignalURL}}</v-card-text>
+        <v-card-text><b>Shortened url:</b> <a target="_blank" :href='generatedURl'>{{generatedURl}}</a></v-card-text>
+        <v-card-text><b>Long url: </b><a target="_blank" :href='orignalURL'>{{orignalURL}}</a></v-card-text>
         <br>
         <v-card
     class="mx-auto"
@@ -92,7 +92,9 @@ import axios from "axios";
 
     //make get request every 5 seconds to end point to get all url information
     setInterval(() => {
-      axios.get('http://localhost:8081/data/'+ url )
+      //only refresh if the brower url is http://localhost:8080/urlcounter
+      if(window.location.href== "http://localhost:8080/urlcounter"){
+        axios.get('http://localhost:8081/data/'+ url )
       .then(response => {
         console.log(response.data.ip);
         let data = {oldUrl : response.data.old_url, newUrl : response.data.short_url, createdBy: response.data.createdBy, clicks: response.data.clicks, ip: response.data.ip};
@@ -100,14 +102,15 @@ import axios from "axios";
         localStorage.clear("generatedURl");
 
         //set local storage
-        localStorage.setItem("generatedURl", data.newUrl);
+        localStorage.setItem("generatedURl", "http://"+data.newUrl);
         //set data to variables
         this.orignalURL = data.oldUrl;
-        this.generatedURl = data.newUrl;
+        this.generatedURl = "http://"+data.newUrl;
         this.createdBy = data.createdBy;
         // 
         localStorage.setItem("items", JSON.stringify(data.ip));
         localStorage.setItem("clicks", data.clicks);
+        localStorage.setItem("originalURL", data.oldUrl);
 
         //check if this.clicks is updated compared to local storage
         if(this.clicks != localStorage.getItem("clicks")){
@@ -121,8 +124,8 @@ import axios from "axios";
       })
       .catch(error => {
         console.log(error);
+      });
       }
-      );
     }, 1000);
     },
   }

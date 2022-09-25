@@ -11,9 +11,9 @@ exports.urlShortner = (req, res) => {
     console.log("generate url");
 
     if (urlValidation.prefixCheck(url)) {
-      generatedURL = generateUrl.generateNewUrl(url, "");
+      generatedURL = generateUrl.generateNewUrl(url, "", req);
     } else {
-      generatedURL = generateUrl.generateNewUrl(url, "http://");
+      generatedURL = generateUrl.generateNewUrl(url, "http://", req);
     }
     variable.orignialURL = generatedURL.orignialURL;
     //send variable in json format

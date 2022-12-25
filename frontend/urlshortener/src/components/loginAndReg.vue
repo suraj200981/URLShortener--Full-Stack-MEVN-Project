@@ -114,10 +114,14 @@ import axios from "axios";
         };
         axios.post('http://localhost:8081/api/login', data)
           .then((res) => {
-            console.log("Logging result: ",res);
+            console.log("Logging result: lmao",res);
+            if(res.status==200){
+              //redirect to google
+              window.location.href = "http://localhost:8080/";
+            }
           })
           .catch((err) => {
-            console.log("What went wrong? : ",err);
+            console.log("What went wrong? lmao : ",err);
           });
       },
         signUp(){

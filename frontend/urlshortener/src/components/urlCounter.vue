@@ -92,7 +92,9 @@ import axios from "axios";
 
     //make get request every 5 seconds to end point to get all url information
     setInterval(() => {
-      axios.get('http://localhost:8081/data/'+ url )
+      //only refresh if the brower url is http://localhost:8080/urlcounter
+      if(window.location.href== "http://localhost:8080/urlcounter"){
+        axios.get('http://localhost:8081/data/'+ url )
       .then(response => {
         console.log(response.data.ip);
         let data = {oldUrl : response.data.old_url, newUrl : response.data.short_url, createdBy: response.data.createdBy, clicks: response.data.clicks, ip: response.data.ip};
@@ -122,8 +124,8 @@ import axios from "axios";
       })
       .catch(error => {
         console.log(error);
+      });
       }
-      );
     }, 1000);
     },
   }
